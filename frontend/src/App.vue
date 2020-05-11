@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="./assets/Logo-White_transparent.png" style="max-width: 500px">
     <router-view/>
   </div>
 </template>
@@ -17,7 +17,9 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  height: 100vh;
   color: #2c3e50;
-  margin-top: 60px;
+  background-image: url('./assets/david_donatello_bg.jpg');
+  background-size: 100%;
 }
 </style>

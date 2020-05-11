@@ -1,14 +1,33 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <div>
-      <input placeholder="mobile number" v-model="address">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+        <h1>{{ msg }}</h1>
+      </div>
+      <div class="col-sm-2"></div>
     </div>
-    <div>
-      <textarea placeholder="Enter the message" v-model="message"></textarea>
+    
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <b-input id="address" placeholder="mobile number" v-model="address"></b-input>
+      </div>
+      <div class="col-sm"></div>
     </div>
-    <div>
-       <button @click="sendMessage">Send Message</button>
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <b-textarea id="message" placeholder="Enter the message" v-model="message" rows="10"></b-textarea>
+      </div>
+      <div class="col-sm"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm"></div>
+      <div class="col-sm">
+        <b-button id="send" @click="sendMessage">Send Message</b-button>
+      </div>
+      <div class="col-sm"></div>
     </div> 
   </div>
 </template>
@@ -18,14 +37,12 @@
 import axios from "axios";
 
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
-  },
+  name: "SMS Blast",
   data() {
     return {
       address: "",
-      message: ""
+      message: "",
+      msg: "SMS Blast Demo Page"
     }
   },
 
@@ -37,6 +54,9 @@ export default {
       .then((res) => {
         console.log(res)
       })
+
+      this.address = ""
+      this.message = ""
     }
   },
 };
@@ -44,18 +64,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+#address {
+  margin-bottom: 30px;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+#message {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+#send {
+  margin-top: 20px;
 }
-a {
-  color: #42b983;
+h1 {
+  padding: 10px;
+  color: white;
+  font-weight: 200;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
 }
 </style>

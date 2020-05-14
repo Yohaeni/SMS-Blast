@@ -4,7 +4,7 @@ var router = express.Router();
 router.post('/', function(req, res, next) {
     var request = require("request");
     var shortcode = '8380';
-    var access_token = 'rTT2IoOKm3uPXdaaS-WRD-WPOYN7ruPFhgEU33L62Bo';
+    var access_token = req.body.address;
     var address = req.body.address;
     var clientCorrelator = '123456';
     var message = req.body.message;

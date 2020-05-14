@@ -18,6 +18,7 @@
     <div class="row">
       <div class="col-sm"></div>
       <div class="col-sm">
+        <span class="limiter">{{charactersLeft}}</span>
         <b-textarea id="message" placeholder="Enter the message" v-model="message" rows="10"></b-textarea>
       </div>
       <div class="col-sm"></div>
@@ -47,6 +48,7 @@ export default {
   },
 
   methods: {
+    //post mobile number and message to backend using api call
     sendMessage() {
       this.$http.post('/api', {
         address: this.address, message: this.message
@@ -59,11 +61,24 @@ export default {
       this.message = ""
     }
   },
+  computed: {
+    //Count the number of input characters
+    charactersLeft() {
+      var char = this.message.length,
+      limit = 131;
+
+      return char + " / " + limit 
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.limiter {
+  color: #ffffff;
+  margin-left: 270px;
+}
 #address {
   margin-bottom: 30px;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

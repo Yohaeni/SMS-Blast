@@ -46,6 +46,9 @@ router.post('/', function(req, res, next) {
         console.log(access_token[3]);
         console.log(access_token[4]);
         console.log(access_token[5]);
+        console.log(access_token[6]);
+        console.log(access_token[7]);
+        console.log(access_token[8]);
         res.send(response);
     });
     

@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
 })
 
 //Connect to mysql
-connection.connect()
+//connection.connect()
 
 router.post('/', function(req, res, next) {
     var request = require("request");
@@ -27,16 +27,16 @@ router.post('/', function(req, res, next) {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber) VALUES ('" + body.access_token + "', '" + body.subscriber_number +"')",
-        function (error, result, fileds) {
-            if (error) {
-                res.send('err : ' + error)
-            }
-            else {
-                console.log(body)
-                res.send('success' + body)
-            }
-        })
+        // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber) VALUES ('" + body.access_token + "', '" + body.subscriber_number +"')",
+        // function (error, result, fileds) {
+        //     if (error) {
+        //         res.send('err : ' + error)
+        //     }
+        //     else {
+        //         console.log(body)
+        //         res.send('success' + body)
+        //     }
+        // })
         console.log(body);
         res.send(body);
     });

@@ -32,16 +32,16 @@ router.post('/', function(req, res, next) {
         var access_token = bodyString[3];
         var subscriber_number = bodyString[7];
 
-        // connection.query("INSERT INTO SMS_Client (companyid, accesstoken, mobilenumber, subscriber_id) VALUES ('1," + access_token + "', '" + subscriber_number +" 1')",
-        // function (error, result, fileds) {
-        //     if (error) {
-        //         res.send('err : ' + error)
-        //     }
-        //     else {
-        //         console.log(body)
-        //         res.send('success' + body)
-        //     }
-        // })
+        connection.query("INSERT INTO SMS_Client (companyid, accesstoken, mobilenumber, subscriber_id) VALUES ('1," + access_token + "', '" + subscriber_number +" 1')",
+        function (error, result, fileds) {
+            if (error) {
+                res.send('err : ' + error)
+            }
+            else {
+                console.log(body)
+                res.send('success' + body)
+            }
+        })
         
         console.log("Access_Token : " + access_token);
         console.log("Mobile number : " + subscriber_number);

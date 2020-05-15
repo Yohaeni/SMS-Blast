@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
         //         res.send('success' + body)
         //     }
         // })
-        console.log(body);
+        console.log(body['access_token']);
         res.send(body);
     });
     

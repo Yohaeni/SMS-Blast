@@ -28,21 +28,22 @@ router.post('/', function(req, res, next) {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        var access_token = response.body.split('"');
+        var bodyString = response.body.split('"');
+        var access_token = bodyString[3];
+        var subscriber_number = bodyString[7];
 
-        // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber) VALUES ('" + body.access_token + "', '" + body.subscriber_number +"')",
-        // function (error, result, fileds) {
-        //     if (error) {
-        //         res.send('err : ' + error)
-        //     }
-        //     else {
-        //         console.log(body)
-        //         res.send('success' + body)
-        //     }
-        // })
+        connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber) VALUES ('" + access_token + "', '" + subscriber_number +"')",
+        function (error, result, fileds) {
+            if (error) {
+                res.send('err : ' + error)
+            }
+            else {
+                console.log(body)
+                res.send('success' + body)
+            }
+        })
         
-        console.log(access_token[3]);
-        console.log(access_token[7]);
+        console.log("success");
         res.send(response);
     });
     

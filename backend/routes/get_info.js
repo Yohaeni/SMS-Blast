@@ -38,7 +38,7 @@ router.post('/', function(req, res, next) {
         //         res.send('success' + body)
         //     }
         // })
-        console.log('success');
+        console.log(body);
         res.send(body);
     });
     

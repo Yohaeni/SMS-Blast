@@ -21,8 +21,8 @@ router.post('/', function(req, res, next) {
     var appId = 'zodGIE6Rb8tBginKBEcR6gtEaoozIyoy';
     var appSecret = 'bbdfb979db0094746acf9008a70095fafccfed0401eabf5fce5fa173ce2d7fc6';
     var code = req.body.code;
-    var access_token = "";
-    var subscriber_number = "";
+    const access_token = "";
+    const subscriber_number = "";
     var options = { method: 'POST',   
     url: 'https://developer.globelabs.com.ph/oauth/access_token?app_id=' + appId + '&app_secret=' + appSecret + '&code=' + code,
     };
@@ -37,7 +37,7 @@ router.post('/', function(req, res, next) {
         res.send(response);
     });
     console.log("Access_Token : " + access_token);
-        console.log("Mobile number : " + subscriber_number);
+    console.log("Mobile number : " + subscriber_number);
     // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
     //     function (error, result, fileds) {
     //         if (error) {

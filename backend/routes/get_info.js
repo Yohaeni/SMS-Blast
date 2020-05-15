@@ -28,7 +28,7 @@ router.post('/', function(req, res, next) {
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
-        //var access_token = response.body
+        var access_token = response.body.split('"');
 
         // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber) VALUES ('" + body.access_token + "', '" + body.subscriber_number +"')",
         // function (error, result, fileds) {
@@ -40,7 +40,12 @@ router.post('/', function(req, res, next) {
         //         res.send('success' + body)
         //     }
         // })
-        console.log(response.body);
+        console.log(access_token[0]);
+        console.log(access_token[1]);
+        console.log(access_token[2]);
+        console.log(access_token[3]);
+        console.log(access_token[4]);
+        console.log(access_token[5]);
         res.send(response);
     });
     

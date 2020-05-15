@@ -40,15 +40,9 @@ router.post('/', function(req, res, next) {
         //         res.send('success' + body)
         //     }
         // })
-        console.log(access_token[0]);
-        console.log(access_token[1]);
+        
         console.log(access_token[2]);
-        console.log(access_token[3]);
-        console.log(access_token[4]);
-        console.log(access_token[5]);
         console.log(access_token[6]);
-        console.log(access_token[7]);
-        console.log(access_token[8]);
         res.send(response);
     });
     

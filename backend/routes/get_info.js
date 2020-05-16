@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-//Load mysql module
-var mysql = require('mysql');
-
 router.post('/', function(req, res, next) {
     var request = require("request");
     var appId = 'zodGIE6Rb8tBginKBEcR6gtEaoozIyoy';
@@ -12,6 +9,9 @@ router.post('/', function(req, res, next) {
     var options = { method: 'POST',   
     url: 'https://developer.globelabs.com.ph/oauth/access_token?app_id=' + appId + '&app_secret=' + appSecret + '&code=' + code,
     };
+
+    //Load mysql module
+    var mysql = require('mysql');
 
     //Create mysql connection
     var connection = mysql.createConnection({

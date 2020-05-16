@@ -4,18 +4,6 @@ var router = express.Router();
 //Load mysql module
 var mysql = require('mysql');
 
-//Create mysql connection
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    port: '3306',
-    password: 'Awesomecompany1234!',
-    database: 'sms_blast'
-})
-
-//Connect to mysql
-connection.connect()
-
 router.post('/', function(req, res, next) {
     var request = require("request");
     var appId = 'zodGIE6Rb8tBginKBEcR6gtEaoozIyoy';
@@ -25,28 +13,41 @@ router.post('/', function(req, res, next) {
     url: 'https://developer.globelabs.com.ph/oauth/access_token?app_id=' + appId + '&app_secret=' + appSecret + '&code=' + code,
     };
 
+    //Create mysql connection
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        port: '3306',
+        password: 'Awesomecompany1234!',
+        database: 'sms_blast'
+    })
+
+    //Connect to mysql
+    connection.connect()
+
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
 
         var bodyString = response.body.split('"');
         var access_token = bodyString[3];
         var subscriber_number = bodyString[7];
+
+        connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
+        function (error, result, fileds) {
+            if (error) {
+                res.send('err : ' + error)
+            }
+            else {
+                console.log(body)
+                res.send('success' + body)
+            }
+        });
         
         console.log("Access_Token : " + access_token);
         console.log("Mobile number : " + subscriber_number);
         res.send(response);
     });
     
-    // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
-    //     function (error, result, fileds) {
-    //         if (error) {
-    //             res.send('err : ' + error)
-    //         }
-    //         else {
-    //             console.log(body)
-    //             res.send('success' + body)
-    //         }
-    // });
 });
 
 

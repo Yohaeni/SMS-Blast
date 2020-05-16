@@ -23,7 +23,7 @@ router.post('/', function(req, res, next) {
     // })
 
     //Connect to mysql
-    //connection.connect()
+   // connection.connect()
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);

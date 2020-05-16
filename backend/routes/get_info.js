@@ -11,16 +11,16 @@ router.post('/', function(req, res, next) {
     };
 
     //Load mysql module
-    var mysql = require('mysql');
+    //var mysql = require('mysql');
 
     //Create mysql connection
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        port: '3306',
-        password: 'Awesomecompany1234!',
-        database: 'sms_blast'
-    })
+    // var connection = mysql.createConnection({
+    //     host: 'localhost',
+    //     user: 'root',
+    //     port: '3306',
+    //     password: 'Awesomecompany1234!',
+    //     database: 'sms_blast'
+    // })
 
     //Connect to mysql
     connection.connect()
@@ -32,16 +32,16 @@ router.post('/', function(req, res, next) {
         var access_token = bodyString[3];
         var subscriber_number = bodyString[7];
 
-        connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
-        function (error, result, fileds) {
-            if (error) {
-                res.send('err : ' + error)
-            }
-            else {
-                console.log(body)
-                res.send('success' + body)
-            }
-        });
+        // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
+        // function (error, result, fileds) {
+        //     if (error) {
+        //         res.send('err : ' + error)
+        //     }
+        //     else {
+        //         console.log(body)
+        //         res.send('success' + body)
+        //     }
+        // });
         
         console.log("Access_Token : " + access_token);
         console.log("Mobile number : " + subscriber_number);

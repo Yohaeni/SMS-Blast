@@ -11,7 +11,7 @@ router.post('/', function (req, res, next) {
         host: 'localhost',
         user: 'root',
         port: '3306',
-        password: '',
+        password: 'Awesomecompany1234!',
         database: 'sms_blast'
     });
 
@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
     });
 
     //Get User Info
-    var sql = "SELECT accesstoken FROM sms_client WHERE mobilenumber = '" + req.body.address + "'";
+    var sql = "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" + req.body.address + "'";
 
     connection.query(sql, function (err, response) {
         if (err) throw err;

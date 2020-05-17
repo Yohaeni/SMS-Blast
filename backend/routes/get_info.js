@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const util = require("util");
 
 router.post('/', function (req, res, next) {
     var request = require("request");
@@ -12,10 +11,10 @@ router.post('/', function (req, res, next) {
         url: 'https://developer.globelabs.com.ph/oauth/access_token?app_id=' + appId + '&app_secret=' + appSecret + '&code=' + code,
     };
 
-    // Load mysql module
+    //Load mysql module
     var mysql = require('mysql');
 
-    // Create mysql connection
+    //Create mysql connection
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',

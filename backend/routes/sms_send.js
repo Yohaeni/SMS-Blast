@@ -66,8 +66,8 @@ router.post('/', function (req, res, next) {
             request(options, function (error, response, body) {
                 if (error) throw new Error(error);
                 console.log(body);
-                res.redirect(req.get('referer'));
-                // res.send(body);
+                // res.redirect(req.get('referer'));
+                res.send(body);
             });
         }
     });

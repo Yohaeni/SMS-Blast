@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
         host: 'localhost',
         user: 'root',
         port: '3306',
-        password: 'Awesomecompany1234!',
+        password: '',
         database: 'sms_blast'
     });
 
@@ -47,7 +47,6 @@ router.post('/', function (req, res, next) {
         //     });
 
         connection.query("SELECT COUNT(*) as count FROM SMS_Client WHERE mobilenumber = '" + subscriber_number + "'", function (err, result) {
-            console.log(util.inspect(result));
             if (result[0].count == 0) {
 
                 var sql = "INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";

@@ -11,7 +11,7 @@ router.post('/', function (req, res, next) {
         host: 'localhost',
         user: 'root',
         port: '3306',
-        password: 'Awesomecompany1234!',
+        password: '',
         database: 'sms_blast'
     });
 
@@ -28,40 +28,48 @@ router.post('/', function (req, res, next) {
         if (err) throw err;
         console.log(response);
 
-        var request = require("request");
-        var shortcode = '8380';
-        var access_token = response[0].accesstoken;
-        console.log(access_token);
-        var address = req.body.address;
-        var clientCorrelator = '123456';
-        var message = req.body.message;
-        var options = {
-            method: 'POST',
-            url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
-            qs: {
-                'access_token': access_token
-            },
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: {
-                'outboundSMSMessageRequest': {
-                    'clientCorrelator': clientCorrelator,
-                    'senderAddress': shortcode,
-                    'outboundSMSTextMessage': {
-                        'message': message
-                    },
-                    'address': address
-                }
-            },
-            json: true
-        };
 
-        request(options, function (error, response, body) {
-            if (error) throw new Error(error);
-            console.log(body);
-            res.send(body);
-        });
+        if (response.length == 0) {
+            res.send({
+                "message": "Oops! Address doesn't exists."
+            });
+        } else {
+            var request = require("request");
+            var shortcode = '8380';
+            var access_token = response[0].accesstoken;
+            console.log(access_token);
+            var address = req.body.address;
+            var clientCorrelator = '123456';
+            var message = req.body.message;
+            var options = {
+                method: 'POST',
+                url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
+                qs: {
+                    'access_token': access_token
+                },
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: {
+                    'outboundSMSMessageRequest': {
+                        'clientCorrelator': clientCorrelator,
+                        'senderAddress': shortcode,
+                        'outboundSMSTextMessage': {
+                            'message': message
+                        },
+                        'address': address
+                    }
+                },
+                json: true
+            };
+
+            request(options, function (error, response, body) {
+                if (error) throw new Error(error);
+                console.log(body);
+                res.redirect(req.get('referer'));
+                // res.send(body);
+            });
+        }
     });
 });
 

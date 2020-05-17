@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
         host: 'localhost',
         user: 'root',
         port: '3306',
-        password: 'Awesomecompany1234!',
+        password: '',
         database: 'sms_blast'
     });
 

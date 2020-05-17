@@ -11,19 +11,19 @@ router.post('/', function(req, res, next) {
     };
 
     //Load mysql module
-    //var mysql = require('mysql');
+    var mysql = require('mysql');
 
     //Create mysql connection
-    // var connection = mysql.createConnection({
-    //     host: 'localhost',
-    //     user: 'root',
-    //     port: '3306',
-    //     password: 'Awesomecompany1234!',
-    //     database: 'sms_blast'
-    // })
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        port: '3306',
+        password: 'Awesomecompany1234!',
+        database: 'sms_blast'
+    });
 
     //Connect to mysql
-   // connection.connect()
+    connection.connect()
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
@@ -31,6 +31,13 @@ router.post('/', function(req, res, next) {
         var bodyString = response.body.split('"');
         var access_token = bodyString[3];
         var subscriber_number = bodyString[7];
+
+        var sql = "INSERT INTO sms_client (accesstoken, mobile_number, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";
+
+        connection.query(sql, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+        });
 
         // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
         // function (error, result, fileds) {

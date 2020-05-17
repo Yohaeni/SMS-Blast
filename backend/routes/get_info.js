@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
         var access_token = bodyString[3];
         var subscriber_number = bodyString[7];
 
-        var sql = "INSERT INTO sms_client (accesstoken, mobile_number, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";
+        var sql = "INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";
 
         connection.query(sql, function (err, result) {
             if (err) throw err;

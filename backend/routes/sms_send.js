@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
     });
 
     //Get User Info
-    var sql = "SELECT accesstoken FROM sms_client WHERE mobile_number = '" + req.body.address + "'";
+    var sql = "SELECT accesstoken FROM sms_client WHERE mobilenumber = '" + req.body.address + "'";
 
     connection.query(sql, function (err, response) {
         if (err) throw err;

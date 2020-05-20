@@ -9,6 +9,9 @@ var usersRouter = require('./routes/users');
 var smsRouter = require('./routes/sms_send');
 var getInfo = require('./routes/get_info');
 
+var getEmployees = require('./routes/get_employees');
+var updateEmployee = require('./routes/update_employee');
+
 var app = express();
 
 // view engine setup
@@ -17,7 +20,9 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,14 +30,16 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', smsRouter);
 app.use('/info', getInfo);
+app.use('/get-employee', getEmployees);
+app.use('/update-employee', updateEmployee);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

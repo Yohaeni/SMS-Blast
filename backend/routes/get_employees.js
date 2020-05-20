@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
         console.log("Connected!");
     });
 
-    connection.query("SELECT company_employee.id as id, company_employee.first_name as first_name, company_employee.last_name as last_name, sms_client.mobilenumber as mobile_number FROM company_employee JOIN sms_client ON company_employee.id = sms_client.subscriber_id", function (err, result) {
+    connection.query("SELECT company_employee.id as id, company_employee.email as email, company_employee.first_name as first_name, company_employee.last_name as last_name, sms_client.mobilenumber as mobile_number FROM company_employee JOIN sms_client ON company_employee.id = sms_client.subscriber_id", function (err, result) {
         res.send(result);
     });
 });

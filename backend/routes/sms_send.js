@@ -6,18 +6,18 @@ router.post('/', function (req, res, next) {
     var shortcode = '8380';
     var access_token = req.body.access_token;
     var address = req.body.address;
-    var addresses = [];
+    //var addresses = [];
     var clientCorrelator = '123456';
     var message = req.body.message;
 
-    if (address.length > 10) {
-        // If there is only one number with 11 digits.
-        if (address.length == 11) {
-            address = address.substr(1, 10);
-        } else if (address.length > 11) { // If there are more than 1 number
-            addresses = address.split(',');
-        }
-    }
+    // if (address.length > 10) {
+    //     // If there is only one number with 11 digits.
+    //     if (address.length == 11) {
+    //         address = address.substr(1, 10);
+    //     } else if (address.length > 11) { // If there are more than 1 number
+    //         addresses = address.split(',');
+    //     }
+    // }
 
     var options = {
         method: 'POST',

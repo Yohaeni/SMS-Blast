@@ -23,7 +23,10 @@ router.post('/', function(req, res, next) {
     });
 
     //Connect to mysql
-    connection.connect()
+    connection.connect(function (err) {
+        if (err) throw err;
+        console.log("Connected!");
+    });
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
@@ -32,24 +35,27 @@ router.post('/', function(req, res, next) {
         var access_token = bodyString[3];
         var subscriber_number = bodyString[7];
 
-        var sql = "INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";
+        //var sql = "INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";
 
-        connection.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log(result);
+        // connection.query(sql, function (err, result) {
+        //     if (err) throw err;
+        //     console.log(result);
+        // });
+
+        connection.query("SELECT COUNT(*) as count FROM SMS_Client WHERE mobilenumber = '" + subscriber_number + "'", function (err, result) {
+            console.log(util.inspect(result));
+            if (result[0].count == 0) {
+
+                var sql = "INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number + "', '1')";
+
+                connection.query(sql, function (err, result) {
+                    if (err) throw err;
+                    console.log(result);
+                });
+
+            }
         });
 
-        // connection.query("INSERT INTO SMS_Client (accesstoken, mobilenumber, subscriber_id) VALUES ('" + access_token + "', '" + subscriber_number +" 1')",
-        // function (error, result, fileds) {
-        //     if (error) {
-        //         res.send('err : ' + error)
-        //     }
-        //     else {
-        //         console.log(body)
-        //         res.send('success' + body)
-        //     }
-        // });
-        
         console.log("Access_Token : " + access_token);
         console.log("Mobile number : " + subscriber_number);
         res.send(response);

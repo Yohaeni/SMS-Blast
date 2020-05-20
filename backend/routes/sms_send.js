@@ -52,7 +52,8 @@ router.post('/', function (req, res, next) {
     }
     // If there are more than one number
     else {
-        addresses.foreach(function (item, index, array) {
+        for (var i = 0; i < addresses.length; i++) {
+            var number = addresses[i];
             var options = {
                 method: 'POST',
                 url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
@@ -69,7 +70,7 @@ router.post('/', function (req, res, next) {
                         'outboundSMSTextMessage': {
                             'message': message
                         },
-                        'address': item
+                        'address': number
                     }
                 },
                 json: true
@@ -81,8 +82,7 @@ router.post('/', function (req, res, next) {
                 console.log(body);
                 res.send(body);
             });
-        })
-
+        }
     }
 
 });

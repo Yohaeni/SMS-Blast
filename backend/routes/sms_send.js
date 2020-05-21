@@ -128,7 +128,6 @@ router.post("/", function (req, res, next) {
                     fName = firstNames[i];
                     lName = lastNames[i];
                     sendingMessage = "Hello " + fName + " " + lName + "!\n" + message
-                    console.log(sendingMessage);
                     access_token = response[0].accesstoken;
                     var options = {
                         method: "POST",
@@ -146,7 +145,7 @@ router.post("/", function (req, res, next) {
                                 clientCorrelator: clientCorrelator,
                                 senderAddress: shortcode,
                                 outboundSMSTextMessage: {
-                                    message: message,
+                                    message: sendingMessage,
                                 },
                                 address: number,
                             },
@@ -154,12 +153,12 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    // request(options,
-                    //     function (error, response, body) {
-                    //         if (error) throw new Error(error);
+                    request(options,
+                        function (error, response, body) {
+                            if (error) throw new Error(error);
 
-                    //         console.log(body);
-                    //     });
+                            console.log(body);
+                        });
 
                     i++;
                 }

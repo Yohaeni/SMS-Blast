@@ -193,12 +193,13 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    await request(options, function (error, response, body) {
-                        if (error) throw new Error(error);
+                    request(options, await
+                        function (error, response, body) {
+                            if (error) throw new Error(error);
 
-                        console.log(body);
-                        res.send(body);
-                    });
+                            console.log(body);
+                            res.send(body);
+                        });
                 }
             });
         }

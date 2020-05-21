@@ -77,7 +77,7 @@ router.post("/", function (req, res, next) {
                             clientCorrelator: clientCorrelator,
                             senderAddress: shortcode,
                             outboundSMSTextMessage: {
-                                message: "Hello" + firstName + " " + lastName + "!\n" + message,
+                                message: "Hello " + firstName + " " + lastName + "!" + message,
                             },
                             address: address,
                         },
@@ -138,7 +138,7 @@ router.post("/", function (req, res, next) {
                                 clientCorrelator: clientCorrelator,
                                 senderAddress: shortcode,
                                 outboundSMSTextMessage: {
-                                    message: "Hello" + firstName + " " + lastName + "!\n" + message,
+                                    message: "Hello " + firstName + " " + lastName + "!" + message,
                                 },
                                 address: number,
                             },

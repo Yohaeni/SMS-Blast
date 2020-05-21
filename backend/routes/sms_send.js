@@ -27,6 +27,7 @@ router.post("/", function (req, res, next) {
     var clientCorrelator = "123456";
     var message = req.body.message;
     var access_token = "";
+    var bodyText = [];
 
     // put numbers into addresses array
     if (address.length > 11) {
@@ -142,11 +143,12 @@ router.post("/", function (req, res, next) {
                             if (error) throw new Error(error);
 
                             console.log(body);
-                            return res.send(body);
+                            bodyText.push(body);
                         });
                 }
             });
         }
+        res.send(bodyText);
     }
 });
 

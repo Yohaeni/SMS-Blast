@@ -100,6 +100,8 @@ router.post("/", function (req, res, next) {
     else {
         for (var i = 0; i < addresses.length; i++) {
             var number = addresses[i];
+            var fName = firstNames[i];
+            var lName = lastNames[i];
             // If there is number with 11 digits.
             if (number.length == 11) {
                 number = number.substr(1, 10);
@@ -120,8 +122,8 @@ router.post("/", function (req, res, next) {
                         message: "Oops! Address doesn't exists.",
                     });
                 } else {
-                    firstName = firstNames[i];
-                    lastName = lastNames[i];
+
+                    message = "Hello " + fName + " " + lName + "!\n" + message
                     access_token = response[0].accesstoken;
                     var options = {
                         method: "POST",
@@ -139,7 +141,7 @@ router.post("/", function (req, res, next) {
                                 clientCorrelator: clientCorrelator,
                                 senderAddress: shortcode,
                                 outboundSMSTextMessage: {
-                                    message: "Hello " + firstName + " " + lastName + "!\n" + message,
+                                    message: message,
                                 },
                                 address: number,
                             },

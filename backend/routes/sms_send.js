@@ -2,13 +2,31 @@ var express = require('express');
 var router = express.Router();
 
 router.post('/', function (req, res, next) {
+    // Load mysql module
+    var mysql = require('mysql');
+
+    // Create mysql connection
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        port: '3306',
+        password: 'Awesomecompany1234!',
+        database: 'sms_blast'
+    });
+
+    //Connect to mysql
+    connection.connect(function (err) {
+        if (err) throw err;
+        console.log("Connected!");
+    });
+
     var request = require("request");
     var shortcode = '8380';
-    var access_token = req.body.access_token;
     var address = req.body.address;
     var addresses = [];
     var clientCorrelator = '123456';
     var message = req.body.message;
+    var access_token = "";
 
     if (address.length > 11) {
         addresses = address.split(',');
@@ -19,35 +37,50 @@ router.post('/', function (req, res, next) {
         if (address.length == 11) {
             address = address.substr(1, 10);
         }
+        //Get User Info
+        var sql = "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" + address + "'";
 
-        var options = {
-            method: 'POST',
-            url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
-            qs: {
-                'access_token': access_token
-            },
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: {
-                'outboundSMSMessageRequest': {
-                    'clientCorrelator': clientCorrelator,
-                    'senderAddress': shortcode,
-                    'outboundSMSTextMessage': {
-                        'message': message
+        connection.query(sql, function (err, response) {
+            if (err) throw err;
+            console.log(response);
+
+            if (response.length == 0) {
+                res.send({
+                    "message": "Oops! Address doesn't exists."
+                });
+            } else {
+                access_token = response[0].accesstoken;
+                var options = {
+                    method: 'POST',
+                    url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
+                    qs: {
+                        'access_token': access_token
                     },
-                    'address': address
-                }
-            },
-            json: true
-        };
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: {
+                        'outboundSMSMessageRequest': {
+                            'clientCorrelator': clientCorrelator,
+                            'senderAddress': shortcode,
+                            'outboundSMSTextMessage': {
+                                'message': message
+                            },
+                            'address': address
+                        }
+                    },
+                    json: true
+                };
 
-        request(options, function (error, response, body) {
-            if (error) throw new Error(error);
+                request(options, function (error, response, body) {
+                    if (error) throw new Error(error);
 
-            console.log(body);
-            res.send(body);
+                    console.log(body);
+                    res.send(body);
+                });
+            }
         });
+
     }
     // If there are more than one number
     else {
@@ -58,34 +91,47 @@ router.post('/', function (req, res, next) {
                 number = number.substr(1, 10);
             }
 
+            //Get User Info
+            var sql = "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" + number + "'";
 
-            var options = {
-                method: 'POST',
-                url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
-                qs: {
-                    'access_token': access_token
-                },
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: {
-                    'outboundSMSMessageRequest': {
-                        'clientCorrelator': clientCorrelator,
-                        'senderAddress': shortcode,
-                        'outboundSMSTextMessage': {
-                            'message': message
+            connection.query(sql, function (err, response) {
+                if (err) throw err;
+                console.log(response);
+
+                if (response.length == 0) {
+                    res.send({
+                        "message": "Oops! Address doesn't exists."
+                    });
+                } else {
+                    var options = {
+                        method: 'POST',
+                        url: 'https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/' + shortcode + '/requests',
+                        qs: {
+                            'access_token': access_token
                         },
-                        'address': number
-                    }
-                },
-                json: true
-            };
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: {
+                            'outboundSMSMessageRequest': {
+                                'clientCorrelator': clientCorrelator,
+                                'senderAddress': shortcode,
+                                'outboundSMSTextMessage': {
+                                    'message': message
+                                },
+                                'address': number
+                            }
+                        },
+                        json: true
+                    };
 
-            request(options, function (error, response, body) {
-                if (error) throw new Error(error);
+                    request(options, function (error, response, body) {
+                        if (error) throw new Error(error);
 
-                console.log(body);
-                res.send(body);
+                        console.log(body);
+                        res.send(body);
+                    });
+                }
             });
         }
     }

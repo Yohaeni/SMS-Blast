@@ -122,8 +122,11 @@ router.post("/", function (req, res, next) {
                         message: "Oops! Address doesn't exists.",
                     });
                 } else {
-                    var fName = firstNames[i];
-                    var lName = lastNames[i];
+                    var fName = "";
+                    var lName = "";
+
+                    fName = firstNames[i];
+                    lName = lastNames[i];
 
                     message = "Hello " + fName + " " + lName + "! " + message
                     access_token = response[0].accesstoken;

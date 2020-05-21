@@ -113,7 +113,7 @@ router.post("/", function (req, res, next) {
                 number +
                 "'";
 
-            connection.query(sql, async function (err, response) {
+            connection.query(sql, function (err, response) {
                 if (err) throw err;
                 console.log(response);
 
@@ -127,7 +127,7 @@ router.post("/", function (req, res, next) {
 
                     fName = firstNames[i];
                     lName = lastNames[i];
-
+                    console.log(fName + lName);
                     message = "Hello " + fName + " " + lName + "!\n" + message
                     access_token = response[0].accesstoken;
                     var options = {
@@ -154,12 +154,12 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    await request(options,
-                        function (error, response, body) {
-                            if (error) throw new Error(error);
+                    // request(options,
+                    //     function (error, response, body) {
+                    //         if (error) throw new Error(error);
 
-                            console.log(body);
-                        });
+                    //         console.log(body);
+                    //     });
 
                     i++;
                 }

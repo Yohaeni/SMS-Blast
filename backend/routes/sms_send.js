@@ -136,13 +136,11 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    request(options, async function (error, response, body) {
+                    setTimeout(request, 5000 * i, options, function (error, response, body) {
                         if (error) throw new Error(error);
 
                         console.log(body);
                         res.send(body);
-
-                        await sleep(1000);
                     });
                 }
             });

@@ -109,8 +109,6 @@ router.post("/", function (req, res, next) {
             firstName = firstNames[i];
             lastName = lastNames[i];
 
-            message = "Hello " + firstName + " " + lastName + "!\n" + message
-
             //Get User Info
             var sql =
                 "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" +
@@ -143,7 +141,7 @@ router.post("/", function (req, res, next) {
                                 clientCorrelator: clientCorrelator,
                                 senderAddress: shortcode,
                                 outboundSMSTextMessage: {
-                                    message: message,
+                                    message: "Hello " + firstName + " " + lastName + "!\n" + message,
                                 },
                                 address: number,
                             },

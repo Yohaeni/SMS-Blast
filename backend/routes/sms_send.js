@@ -89,9 +89,66 @@ router.post("/", function (req, res, next) {
         });
     }
     // If there are more than one number
+    // else {
+    //     for (var i = 0; i < addresses.length; i++) {
+    //         var number = addresses[i];
+    //         // If there is number with 11 digits.
+    //         if (number.length == 11) {
+    //             number = number.substr(1, 10);
+    //         }
+
+    //         //Get User Info
+    //         var sql =
+    //             "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" +
+    //             number +
+    //             "'";
+
+    //         connection.query(sql, function (err, response) {
+    //             if (err) throw err;
+    //             console.log(response);
+
+    //             if (response.length == 0) {
+    //                 res.send({
+    //                     message: "Oops! Address doesn't exists.",
+    //                 });
+    //             } else {
+    //                 var options = {
+    //                     method: "POST",
+    //                     url: "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/" +
+    //                         shortcode +
+    //                         "/requests",
+    //                     qs: {
+    //                         access_token: access_token,
+    //                     },
+    //                     headers: {
+    //                         "Content-Type": "application/json",
+    //                     },
+    //                     body: {
+    //                         outboundSMSMessageRequest: {
+    //                             clientCorrelator: clientCorrelator,
+    //                             senderAddress: shortcode,
+    //                             outboundSMSTextMessage: {
+    //                                 message: message,
+    //                             },
+    //                             address: number,
+    //                         },
+    //                     },
+    //                     json: true,
+    //                 };
+
+    //                 request(options, function (error, response, body) {
+    //                     if (error) throw new Error(error);
+
+    //                     console.log(body);
+    //                     res.send(body);
+    //                 });
+    //             }
+    //         });
+    //     }
+    // }
     else {
-        for (var i = 0; i < addresses.length; i++) {
-            var number = addresses[i];
+        for (const number of addresses) {
+            //var number = addresses[i];
             // If there is number with 11 digits.
             if (number.length == 11) {
                 number = number.substr(1, 10);
@@ -136,7 +193,7 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    setTimeout(request, 5000 * i, options, function (error, response, body) {
+                    request(options, function (error, response, body) {
                         if (error) throw new Error(error);
 
                         console.log(body);

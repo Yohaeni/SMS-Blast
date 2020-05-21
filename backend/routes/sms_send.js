@@ -169,6 +169,7 @@ router.post("/", function (req, res, next) {
                         message: "Oops! Address doesn't exists.",
                     });
                 } else {
+                    access_token = response[0].accesstoken;
                     var options = {
                         method: "POST",
                         url: "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/" +

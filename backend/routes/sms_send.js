@@ -23,6 +23,10 @@ router.post("/", function (req, res, next) {
     var request = require("request");
     var shortcode = "8380";
     var address = req.body.address;
+    var firstName = req.body.firstname;
+    var lastName = req.body.lastname;
+    var firstNames = [];
+    var lastNames = [];
     var addresses = [];
     var clientCorrelator = "123456";
     var message = req.body.message;
@@ -31,6 +35,8 @@ router.post("/", function (req, res, next) {
     // put numbers into addresses array
     if (address.length > 11) {
         addresses = address.split(",");
+        firstNames = firstName.split(",");
+        lastNames = lastName.split(",");
     }
 
     // If there is only one mobile number
@@ -71,7 +77,7 @@ router.post("/", function (req, res, next) {
                             clientCorrelator: clientCorrelator,
                             senderAddress: shortcode,
                             outboundSMSTextMessage: {
-                                message: message,
+                                message: "Hello" + firstName + " " + lastName + "!\n" + message,
                             },
                             address: address,
                         },
@@ -90,12 +96,15 @@ router.post("/", function (req, res, next) {
     }
     // If there are more than one number
     else {
-        for (const number of addresses) {
-            //var number = addresses[i];
+        for (var i = 0; i > addresses.length; i++) {
+            var number = addresses[i];
             // If there is number with 11 digits.
             if (number.length == 11) {
                 number = number.substr(1, 10);
             }
+
+            firstName = firstNames[i];
+            lastName = lastNames[i];
 
             //Get User Info
             var sql =
@@ -129,7 +138,7 @@ router.post("/", function (req, res, next) {
                                 clientCorrelator: clientCorrelator,
                                 senderAddress: shortcode,
                                 outboundSMSTextMessage: {
-                                    message: message,
+                                    message: "Hello" + firstName + " " + lastName + "!\n" + message,
                                 },
                                 address: number,
                             },

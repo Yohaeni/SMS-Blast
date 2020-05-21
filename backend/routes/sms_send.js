@@ -160,7 +160,7 @@ router.post("/", function (req, res, next) {
                 number +
                 "'";
 
-            connection.query(sql, async function (err, response) {
+            connection.query(sql, function (err, response) {
                 if (err) throw err;
                 console.log(response);
 
@@ -194,7 +194,7 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    request(options, await
+                    request(options,
                         function (error, response, body) {
                             if (error) throw new Error(error);
 

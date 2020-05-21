@@ -98,10 +98,10 @@ router.post("/", function (req, res, next) {
     }
     // If there are more than one number
     else {
-        for (var i = 0; i < addresses.length; i++) {
-            var number = addresses[i];
-            var fName = firstNames[i];
-            var lName = lastNames[i];
+        var i = 0;
+        for (const number of addresses) {
+            //var number = addresses[i];
+
             // If there is number with 11 digits.
             if (number.length == 11) {
                 number = number.substr(1, 10);
@@ -122,6 +122,8 @@ router.post("/", function (req, res, next) {
                         message: "Oops! Address doesn't exists.",
                     });
                 } else {
+                    var fName = firstNames[i];
+                    var lName = lastNames[i];
 
                     message = "Hello " + fName + " " + lName + "!\n" + message
                     access_token = response[0].accesstoken;
@@ -155,6 +157,8 @@ router.post("/", function (req, res, next) {
 
                             console.log(body);
                         });
+
+                    i += 1;
                 }
             });
         }

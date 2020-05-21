@@ -99,7 +99,7 @@ router.post("/", function (req, res, next) {
     }
     // If there are more than one number
     else {
-        for (var i = 0; i > addresses.length; i++) {
+        for (var i = 0; i < addresses.length; i++) {
             var number = addresses[i];
             // If there is number with 11 digits.
             if (number.length == 11) {

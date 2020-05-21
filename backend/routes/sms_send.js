@@ -125,7 +125,7 @@ router.post("/", function (req, res, next) {
                     var fName = firstNames[i];
                     var lName = lastNames[i];
 
-                    message = "Hello " + fName + " " + lName + "!\n" + message
+                    message = "Hello " + fName + " " + lName + "! " + message
                     access_token = response[0].accesstoken;
                     var options = {
                         method: "POST",

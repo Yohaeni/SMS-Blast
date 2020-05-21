@@ -46,7 +46,12 @@ router.post("/", function (req, res, next) {
             address = address.substr(1, 10);
         }
 
-        message = "Hello " + firstName + " " + lastName + "!\n" + message;
+        if (firstName != null && lastName != null) {
+            sendingMessage = "Hello " + firstName + " " + lastName + "!\n" + message;
+        } else {
+            sendingMessage = message;
+        }
+
         //Get User Info
         var sql =
             "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" +
@@ -79,7 +84,7 @@ router.post("/", function (req, res, next) {
                             clientCorrelator: clientCorrelator,
                             senderAddress: shortcode,
                             outboundSMSTextMessage: {
-                                message: message,
+                                message: sendingMessage,
                             },
                             address: address,
                         },

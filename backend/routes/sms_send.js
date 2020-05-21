@@ -46,8 +46,6 @@ router.post("/", function (req, res, next) {
             address = address.substr(1, 10);
         }
 
-        message = "Hello " + firstName + " " + lastName + "!\n" + message
-
         //Get User Info
         var sql =
             "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" +
@@ -80,7 +78,7 @@ router.post("/", function (req, res, next) {
                             clientCorrelator: clientCorrelator,
                             senderAddress: shortcode,
                             outboundSMSTextMessage: {
-                                message: message,
+                                message: "Hello " + firstName + " " + lastName + "!\n" + message,
                             },
                             address: address,
                         },
@@ -105,10 +103,7 @@ router.post("/", function (req, res, next) {
             if (number.length == 11) {
                 number = number.substr(1, 10);
             }
-
-            firstName = firstNames[i];
-            lastName = lastNames[i];
-
+            console.log(number);
             //Get User Info
             var sql =
                 "SELECT accesstoken FROM SMS_Client WHERE mobilenumber = '" +
@@ -124,6 +119,8 @@ router.post("/", function (req, res, next) {
                         message: "Oops! Address doesn't exists.",
                     });
                 } else {
+                    firstName = firstNames[i];
+                    lastName = lastNames[i];
                     access_token = response[0].accesstoken;
                     var options = {
                         method: "POST",

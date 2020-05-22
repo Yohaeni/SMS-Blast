@@ -25,9 +25,11 @@ router.post("/", function (req, res, next) {
     var address = req.body.address;
     var firstName = req.body.firstname;
     var lastName = req.body.lastname;
+    var pMessage = req.body.pmessage;
     var firstNames = [];
     var lastNames = [];
     var addresses = [];
+    var pMessages = [];
     var clientCorrelator = "123456";
     var message = req.body.message;
     var access_token = "";
@@ -129,10 +131,12 @@ router.post("/", function (req, res, next) {
                 } else {
                     var fName = "";
                     var lName = "";
+                    var pMsg = "";
 
                     fName = firstNames[i];
                     lName = lastNames[i];
-                    sendingMessage = "Hello " + fName + " " + lName + "!\n" + message
+                    pMsg = pMessages[i];
+                    sendingMessage = "Hello " + fName + " " + lName + "!\n" + message + "\n" + pMsg;
                     access_token = response[0].accesstoken;
                     var options = {
                         method: "POST",

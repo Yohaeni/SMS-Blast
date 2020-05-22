@@ -166,18 +166,18 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    request(options,
-                        function (error, response, body) {
-                            if (error) throw new Error(error);
+                    // request(options,
+                    //     function (error, response, body) {
+                    //         if (error) throw new Error(error);
 
-                            console.log(body);
-                        });
+                    //         console.log(body);
+                    //     });
 
                     i++;
                 }
             });
         }
-        res.send("Success");
+        res.redirect(200, 'http://test.davidandgolyat.com/sms-blast');
     }
 });
 

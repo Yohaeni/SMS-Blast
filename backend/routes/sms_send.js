@@ -177,7 +177,7 @@ router.post("/", function (req, res, next) {
                 }
             });
         }
-        res.send("success");
+        res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
     }
 });
 

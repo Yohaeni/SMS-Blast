@@ -1,13 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/', function(req, res, next) {
+router.post('/', function (req, res, next) {
     var request = require("request");
     var appId = 'zodGIE6Rb8tBginKBEcR6gtEaoozIyoy';
     var appSecret = 'bbdfb979db0094746acf9008a70095fafccfed0401eabf5fce5fa173ce2d7fc6';
     var code = req.body.code;
-    var options = { method: 'POST',   
-    url: 'https://developer.globelabs.com.ph/oauth/access_token?app_id=' + appId + '&app_secret=' + appSecret + '&code=' + code,
+    var options = {
+        method: 'POST',
+        url: 'https://developer.globelabs.com.ph/oauth/access_token?app_id=' + appId + '&app_secret=' + appSecret + '&code=' + code,
     };
 
     //Load mysql module
@@ -53,6 +54,9 @@ router.post('/', function(req, res, next) {
                     console.log(result);
                 });
 
+            } else {
+                console.log("This user is already existed");
+                continue;
             }
         });
 
@@ -60,7 +64,7 @@ router.post('/', function(req, res, next) {
         console.log("Mobile number : " + subscriber_number);
         res.send(response);
     });
-    
+
 });
 
 

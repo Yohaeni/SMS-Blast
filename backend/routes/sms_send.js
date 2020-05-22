@@ -39,6 +39,7 @@ router.post("/", function (req, res, next) {
         addresses = address.split(",");
         firstNames = firstName.split(",");
         lastNames = lastName.split(",");
+        pMessages = pMessage.split(",");
     }
 
     // If there is only one mobile number

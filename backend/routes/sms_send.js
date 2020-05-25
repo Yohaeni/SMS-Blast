@@ -62,8 +62,8 @@ router.post("/", function (req, res, next) {
             "'";
 
         // Start Time
-        var startTime = new Date().getTime();
-        console.log(startTime);
+        var startTime = new Date();
+        console.log(startTime.getTime());
 
         connection.query(sql, function (err, response) {
             if (err) throw err;
@@ -108,16 +108,16 @@ router.post("/", function (req, res, next) {
             }
         });
 
-        var endTime = new Date().getTime();
-        console.log(endTime);
-        totalTime = endTime - startTime;
+        var endTime = new Date();
+        console.log(endTime.getFullYear() + "-" + endTime.getMonth() + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds());
+        totalTime = endTime.getTime() - startTime.getTime();
         console.log("Time consumed : " + totalTime + "ms");
     }
     // If there are more than one number
     else {
         var i = 0;
-        var startTime = new Date().getTime();
-        console.log(startTime);
+        var startTime = new Date();
+        console.log(startTime.getTime());
         for (const number of addresses) {
             //var number = addresses[i];
 
@@ -177,20 +177,20 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    request(options,
-                        function (error, response, body) {
-                            if (error) throw new Error(error);
+                    // request(options,
+                    //     function (error, response, body) {
+                    //         if (error) throw new Error(error);
 
-                            console.log(body);
-                        });
+                    //         console.log(body);
+                    //     });
 
                     i++;
                 }
             });
         }
-        var endTime = new Date().getTime();
-        var totalTime = endTime - startTime;
-        console.log(endTime);
+        var endTime = new Date();
+        var totalTime = endTime.getTime() - startTime.getTime();
+        console.log(endTime.getFullYear() + "-" + endTime.getMonth() + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds());
         console.log("Time consumed : " + totalTime + "ms");
         res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
     }

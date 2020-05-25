@@ -61,6 +61,10 @@ router.post("/", function (req, res, next) {
             address +
             "'";
 
+        // Start Time
+        var startTime = new Date().getTime();
+        console.log(startTime);
+
         connection.query(sql, function (err, response) {
             if (err) throw err;
             console.log(response);
@@ -103,10 +107,17 @@ router.post("/", function (req, res, next) {
                 });
             }
         });
+
+        var endTime = new Date().getTime();
+        console.log(endTime);
+        totalTime = endTime - startTime;
+        console.log("Time consumed : " + totalTime);
     }
     // If there are more than one number
     else {
         var i = 0;
+        var startTime = new Date().getTime();
+        console.log(startTime);
         for (const number of addresses) {
             //var number = addresses[i];
 
@@ -166,17 +177,21 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    request(options,
-                        function (error, response, body) {
-                            if (error) throw new Error(error);
+                    // request(options,
+                    //     function (error, response, body) {
+                    //         if (error) throw new Error(error);
 
-                            console.log(body);
-                        });
+                    //         console.log(body);
+                    //     });
 
                     i++;
                 }
             });
         }
+        var endTime = new Date().getTime();
+        var totalTime = endTime - startTime;
+        console.log(endTime);
+        console.log("Time consumed : " + totalTime);
         res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
     }
 });

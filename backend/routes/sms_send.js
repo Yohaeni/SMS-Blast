@@ -111,7 +111,7 @@ router.post("/", function (req, res, next) {
         var endTime = new Date().getTime();
         console.log(endTime);
         totalTime = endTime - startTime;
-        console.log("Time consumed : " + totalTime);
+        console.log("Time consumed : " + totalTime + "ms");
     }
     // If there are more than one number
     else {
@@ -191,7 +191,7 @@ router.post("/", function (req, res, next) {
         var endTime = new Date().getTime();
         var totalTime = endTime - startTime;
         console.log(endTime);
-        console.log("Time consumed : " + totalTime);
+        console.log("Time consumed : " + totalTime + "ms");
         res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
     }
 });

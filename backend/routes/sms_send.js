@@ -190,7 +190,7 @@ router.post("/", function (req, res, next) {
         }
         var endTime = new Date();
         var totalTime = endTime.getTime() - startTime.getTime();
-        console.log(endTime.getFullYear() + "-" + endTime.getMonth() + 1 + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds());
+        console.log(endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds());
         console.log("Time consumed : " + totalTime + "ms");
         res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
     }

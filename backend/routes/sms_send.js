@@ -144,11 +144,14 @@ router.post("/", function (req, res, next) {
                     var fName = "";
                     var lName = "";
                     var pMsg = "";
+                    var fullName = "";
 
                     fName = firstNames[i];
                     lName = lastNames[i];
                     pMsg = pMessages[i];
                     sendingMessage = "Hello " + fName + " " + lName + "!\n" + message + "\n" + pMsg;
+                    fullName = fName + " " + lName;
+
 
                     console.log(sendingMessage);
 
@@ -183,6 +186,15 @@ router.post("/", function (req, res, next) {
 
                     //         console.log(body);
                     //     });
+                    var times = new Date();
+                    var timestamp = times.getFullYear() + "-" + (times.getMonth() + 1) + "-" + times.getDate() + " " + times.getHours() + ":" + times.getMinutes() + ":"
+                    times.getSeconds() + "." + times.getMilliseconds();
+                    var smsQuery = "INSERT INTO sms_message (recipients,message,timestamp) VALUES ('" + fullName + "', '" + sendingMessage + "', " + timestamp + "')";
+
+                    connection.query(smsQuery, function (err, response) {
+                        if (err) throw err;
+                        console.log(response);
+                    })
 
                     i++;
                 }
@@ -190,7 +202,7 @@ router.post("/", function (req, res, next) {
         }
         var endTime = new Date();
         var totalTime = endTime.getTime() - startTime.getTime();
-        console.log(endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds());
+        console.log(endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds() + "." + endTime.getMilliseconds());
         console.log("Time consumed : " + totalTime + "ms");
         res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
     }

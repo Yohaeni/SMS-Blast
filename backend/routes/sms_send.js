@@ -180,22 +180,24 @@ router.post("/", function (req, res, next) {
                         json: true,
                     };
 
-                    request(options,
-                        function (error, response, body) {
-                            if (error) throw new Error(error);
+                    var times = new Date();
+                    var timestamp = times.getFullYear() + "-" + (times.getMonth() + 1) + "-" + times.getDate() + " " + times.getHours() + ":" + times.getMinutes() + ":" +
+                        times.getSeconds() + "." + times.getMilliseconds();
+                    var smsQuery = "INSERT INTO sms_message (recipients,message,timestamp) VALUES ('" + fullName + "', '" + sendingMessage + "', '" + timestamp + "')";
 
-                            console.log(body);
-                        });
+                    connection.query(smsQuery, function (err, response) {
+                        if (err) {
+                            throw err;
+                        } else {
+                            request(options,
+                                function (error, response, body) {
+                                    if (error) throw new Error(error);
 
-                    // var times = new Date();
-                    // var timestamp = times.getFullYear() + "-" + (times.getMonth() + 1) + "-" + times.getDate() + " " + times.getHours() + ":" + times.getMinutes() + ":" +
-                    //     times.getSeconds() + "." + times.getMilliseconds();
-                    // var smsQuery = "INSERT INTO sms_message (recipients,message,timestamp) VALUES ('" + fullName + "', '" + sendingMessage + "', '" + timestamp + "')";
-
-                    // connection.query(smsQuery, function (err, response) {
-                    //     if (err) throw err;
-                    //     console.log(response);
-                    // })
+                                    console.log(body);
+                                });
+                        }
+                        console.log(response);
+                    })
 
                     i++;
                 }

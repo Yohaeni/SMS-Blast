@@ -11,6 +11,7 @@ var getInfo = require('./routes/get_info');
 
 var getEmployees = require('./routes/get_employees');
 var updateEmployee = require('./routes/update_employee');
+var getHisroty = require('./routes/get_history');
 
 var app = express();
 
@@ -32,6 +33,7 @@ app.use('/api', smsRouter);
 app.use('/info', getInfo);
 app.use('/get-employee', getEmployees);
 app.use('/update-employee', updateEmployee);
+app.use('/get-history', getHisroty);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

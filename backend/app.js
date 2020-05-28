@@ -19,7 +19,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(express.static(__dirname, {
+app.use(express.static(__dirname, +'/static', {
   dotfiles: 'allow'
 }));
 app.use(logger('dev'));

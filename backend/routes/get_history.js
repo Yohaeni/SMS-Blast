@@ -20,7 +20,7 @@ router.post('/', function (req, res, next) {
         console.log("Connected!");
     });
 
-    connection.query("SELECT recipients,message,timestamp FROM `sms_message` ORDER BY timestamp DESC LIMIT 10", function (err, result) {
+    connection.query("SELECT recipients,message,timestamp FROM `sms_message` ORDER BY timestamp DESC LIMIT 30", function (err, result) {
         res.json(result);
     });
 });

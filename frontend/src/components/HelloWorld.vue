@@ -7,7 +7,7 @@
       </div>
       <div class="col-sm-2"></div>
     </div>
-    
+
     <div class="row">
       <div class="col-sm"></div>
       <div class="col-sm">
@@ -29,7 +29,7 @@
         <b-button id="send" @click="sendMessage">Send Message</b-button>
       </div>
       <div class="col-sm"></div>
-    </div> 
+    </div>
   </div>
 </template>
 
@@ -44,30 +44,32 @@ export default {
       address: "",
       message: "",
       msg: "SMS Blast Demo Page"
-    }
+    };
   },
 
   methods: {
     //post mobile number and message to backend using api call
     sendMessage() {
-      this.$http.post('/api', {
-        address: this.address, message: this.message
-      })
-      .then((res) => {
-        console.log(res)
-      })
+      this.$http
+        .post("/api", {
+          address: this.address,
+          message: this.message
+        })
+        .then(res => {
+          console.log(res);
+        });
 
-      this.address = ""
-      this.message = ""
+      this.address = "";
+      this.message = "";
     }
   },
   computed: {
     //Count the number of input characters
     charactersLeft() {
       var char = this.message.length,
-      limit = 131;
+        limit = 160;
 
-      return char + " / " + limit 
+      return char + " / " + limit;
     }
   }
 };
@@ -81,10 +83,10 @@ export default {
 }
 #address {
   margin-bottom: 30px;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
 #message {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
 #send {
   margin-top: 20px;
@@ -93,6 +95,6 @@ h1 {
   padding: 10px;
   color: white;
   font-weight: 200;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
 </style>

@@ -17,6 +17,13 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
+      },
+      '/getHistory': {
+        target: 'https://backend.davidandgolyat.com/get-history',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getHistory': ''
+        }
       }
     },
 

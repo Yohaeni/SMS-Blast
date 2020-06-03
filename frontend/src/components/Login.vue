@@ -1,22 +1,23 @@
 <template>
   <div>
+    <img src="../assets/Logo-White_transparent.png" style="max-width: 500px" />
     <section id="login" v-bind:class="isShake">
-      <form>
+      <form autocomplete="off">
         <h2>Login</h2>
         <div class="info" v-bind:class="good">
           <p>{{ alert.message }}</p>
         </div>
-        <label for="emailId" class="grey-text" style="text-align: left;">Email address</label>
-        <input id="emailId" type="text" v-model="login.login" />
+        <label for="emailId" style="text-align: left;" required>Email address</label>
+        <input id="emailId" type="text" class="form-control" v-model="login.login" />
         <br />
-        <label for="password" class="grey-text" style="text-align: left;">Password</label>
-        <input id="password" type="password" v-model="login.password" />
+        <label for="password" class="grey-text" style="text-align: left;" required>Password</label>
+        <input id="password" type="password" class="form-control" v-model="login.password" />
         <br />
         <p>
           {{ alert.register }}
-          <router-link :to="Register">Click Here</router-link>
+          <router-link to="/Register">Click Here</router-link>
         </p>
-        <button v-on:click="onSubmit">Log in</button>
+        <button @click="onSubmit">Log in</button>
       </form>
     </section>
   </div>
@@ -43,31 +44,12 @@ export default {
       }
     };
   },
-  computed: {
-    isShake: function() {
-      console.log(this.shake);
-      if (this.shake == true) {
-        return "shake";
-      }
-      return "none";
-    }
-  },
+  computed: {},
   methods: {
     onSubmit: function(event) {
       event.preventDefault();
-      this.shake = false;
-      setTimeout(function() {
-        if (
-          this.fake.login == this.login.login &&
-          this.fake.password == this.login.password
-        ) {
-          this.alert.message = "Hello Huston !";
-        } else {
-          this.shake = true;
-          this.alert.message = "Huston, we got a problem !";
-        }
-      }, 3000);
-      console.log(this.shake);
+      alert("You are logged in!");
+      console.log(this.login.login);
     }
   }
 };

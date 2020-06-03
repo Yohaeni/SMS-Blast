@@ -1,25 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/Logo-White_transparent.png" style="max-width: 500px">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   height: 100vh;
   color: #2c3e50;
-  background-image: url('./assets/david_donatello_bg.jpg');
+  background-image: url("./assets/david_donatello_bg.jpg");
   background-size: 100%;
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
   <div>
+    <img src="../assets/Logo-White_transparent.png" style="max-width: 500px" />
     <section id="register">
-      <form>
+      <form autocomplete="off">
         <p class="h4 text-center mb-4">Sign up</p>
         <p class="h5 mb-4">Company Information</p>
         <label for="defaultFormRegisterNameEx" class="grey-text">Company Name</label>
@@ -10,6 +11,7 @@
           id="defaultFormRegisterNameEx"
           class="form-control"
           v-model="companyName"
+          required
         />
         <br />
         <label for="defaultFormRegisterCompanyContact" class="grey-text">Company Mobile Number</label>
@@ -18,6 +20,7 @@
           id="defaultFormRegisterCompanyContact"
           class="form-control"
           v-model="companyContact"
+          required
         />
         <br />
         <label for="defaultFormRegisterEmailEx" class="grey-text">Company email</label>
@@ -26,6 +29,7 @@
           id="defaultFormRegisterEmailEx"
           class="form-control"
           v-model="companyEmail"
+          required
         />
         <br />
         <label for="defaultFormRegisterPasswordEx" class="grey-text">Your password</label>
@@ -34,6 +38,7 @@
           id="defaultFormRegisterPasswordEx"
           class="form-control"
           v-model="password"
+          required
         />
         <br />
         <label for="defaultFormRegisterConfirmPasswordEx" class="grey-text">Confirm Your password</label>
@@ -42,6 +47,7 @@
           id="defaultFormRegisterConfirmPasswordEx"
           class="form-control"
           v-model="confirmPassword"
+          required
         />
         <br />
         <p class="h5 mb-4">Personal Information</p>
@@ -51,10 +57,17 @@
           id="defaultFormRegisterFirstName"
           class="form-control"
           v-model="firstName"
+          required
         />
         <br />
         <label for="defaultFormRegisterLastName" class="grey-text">Last Name</label>
-        <input type="text" id="defaultFormRegisterLastName" class="form-control" v-model="lastName" />
+        <input
+          type="text"
+          id="defaultFormRegisterLastName"
+          class="form-control"
+          v-model="lastName"
+          required
+        />
         <br />
         <label
           for="defaultFormRegisterMobileNumber"
@@ -68,7 +81,7 @@
         />
         <br />
         <div class="text-center mt-4">
-          <button class="btn btn-unique" type="submit">Register</button>
+          <button class="btn btn-unique" @click="submitRegister">Register</button>
         </div>
       </form>
     </section>
@@ -88,6 +101,16 @@ export default {
       lastName: "",
       mobileNumber: ""
     };
+  },
+  methods: {
+    submitRegister() {
+      if (this.password === this.confirmPassword) {
+        alert("Thanks for Signup! Now you can Login");
+        this.$router.replace("/");
+      } else {
+        alert("Password is not matching!");
+      }
+    }
   }
 };
 </script>

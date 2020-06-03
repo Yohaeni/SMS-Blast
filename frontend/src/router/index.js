@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import SmsBlast from '@/components/SmsBlast'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
+import MainPage from '@/components/MainPage'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [{
-      path: '/',
+      path: '/sms',
       name: 'SMS Blast',
-      component: HelloWorld
+      component: SmsBlast
     },
     {
-      path: '/login',
+      path: '/',
       name: 'Login',
       component: Login
     },
@@ -22,6 +23,11 @@ export default new Router({
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/main',
+      name: 'MainPage',
+      component: MainPage
     }
   ]
 })

@@ -66,7 +66,12 @@
     <div class="row">
       <div class="col-sm"></div>
       <div class="col-sm">
-        <b-button id="send" @click="sendMessage">Send Message</b-button>
+        <b-button
+          style="width: 500px;"
+          variant="primary"
+          id="send"
+          @click="sendMessage"
+        >Send Message</b-button>
       </div>
       <div class="col-sm"></div>
     </div>
@@ -77,6 +82,9 @@
         <label id="history_label" for="history">
           <h1>SMS History</h1>
         </label>
+        <b-button style="margin-left: 20px;" variant="outline-primary" @click="getHistory()">
+          <b-icon icon="arrow-counterclockwise"></b-icon>
+        </b-button>
         <div class="history_box">
           <table id="history" v-if="histories">
             <thead>

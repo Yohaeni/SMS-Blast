@@ -59,7 +59,13 @@
       <div class="col-sm"></div>
       <div class="col-sm">
         <span class="limiter">{{charactersLeft}}</span>
-        <b-textarea id="message" placeholder="Enter the message" v-model="message" rows="10"></b-textarea>
+        <b-textarea
+          id="message"
+          placeholder="Enter the message"
+          v-model="message"
+          :maxlength="160"
+          rows="10"
+        ></b-textarea>
       </div>
       <div class="col-sm"></div>
     </div>
@@ -196,6 +202,7 @@ export default {
         firstNames.push(firstName);
         lastNames.push(lastName);
         pMessages.push(pMessage);
+        console.log(data);
       }
       this.address = addresses.toString();
       this.firstName = firstNames.toString();

@@ -12,6 +12,7 @@ var getInfo = require('./routes/get_info');
 var getEmployees = require('./routes/get_employees');
 var updateEmployee = require('./routes/update_employee');
 var getHisroty = require('./routes/get_history');
+var getStatus = require('./routes/get_status')
 
 var app = express();
 
@@ -37,6 +38,7 @@ app.use('/info', getInfo);
 app.use('/get-employee', getEmployees);
 app.use('/update-employee', updateEmployee);
 app.use('/get-history', getHisroty);
+app.use('/get-status', getStatus)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

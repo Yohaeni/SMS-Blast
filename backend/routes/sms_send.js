@@ -1,4 +1,7 @@
 var express = require("express");
+const {
+    response
+} = require("express");
 var router = express.Router();
 
 router.post("/", function (req, res, next) {
@@ -126,6 +129,7 @@ router.post("/", function (req, res, next) {
         console.log(endTime.getFullYear() + "-" + endTime.getMonth() + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds());
         totalTime = endTime.getTime() - startTime.getTime();
         console.log("Time consumed : " + totalTime + "ms");
+        res.json(response);
     }
     // If there are more than one number
     else {
@@ -222,7 +226,7 @@ router.post("/", function (req, res, next) {
         var totalTime = endTime.getTime() - startTime.getTime();
         console.log(endTime.getFullYear() + "-" + (endTime.getMonth() + 1) + "-" + endTime.getDate() + " " + endTime.getHours() + ":" + endTime.getMinutes() + ":" + endTime.getSeconds() + "." + endTime.getMilliseconds());
         console.log("Time consumed : " + totalTime + "ms");
-        res.redirect(301, 'http://test.davidandgolyat.com/sms-blast');
+        res.json(response);
     }
 });
 

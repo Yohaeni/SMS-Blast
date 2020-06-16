@@ -24,6 +24,13 @@ module.exports = {
         pathRewrite: {
           '^/getHistory': ''
         }
+      },
+      '/getStatus': {
+        target: 'https://backend.davidandgolyat.com/get-status',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/getStatus': ''
+        }
       }
     },
 

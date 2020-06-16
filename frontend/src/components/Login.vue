@@ -50,6 +50,7 @@ export default {
       event.preventDefault();
       alert("You are logged in!");
       console.log(this.login.login);
+      this.$router.push("/audit");
     }
   }
 };

@@ -4,6 +4,8 @@ import SmsBlast from '@/components/SmsBlast'
 import Login from '@/components/Login'
 import Register from '@/components/Register'
 import MainPage from '@/components/MainPage'
+import Audit from '@/components/Audit'
+import Subscribe from '@/components/Subscribe'
 
 Vue.use(Router)
 
@@ -28,6 +30,16 @@ export default new Router({
       path: '/main',
       name: 'MainPage',
       component: MainPage
+    },
+    {
+      path: '/audit',
+      name: 'Audit',
+      component: Audit
+    },
+    {
+      path: '/subscribe',
+      name: 'Subscribe',
+      component: Subscribe
     }
   ]
 })

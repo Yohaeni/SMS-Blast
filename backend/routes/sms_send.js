@@ -4,6 +4,7 @@ var router = express.Router();
 router.post("/", function (req, res, next) {
     // Load mysql module
     var mysql = require("mysql");
+    res.setHeader("Access-Control-Allow-Origin", "*");
 
     // Create mysql connection
     var connection = mysql.createConnection({
